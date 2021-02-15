@@ -21,11 +21,16 @@ const Menu = () => {
   )
 }
 
-const Anecdote = ({ anecdote }) => {
+const Anecdote = ({ anecdote, addVote }) => {
+  const handleClick = () => {
+    addVote(anecdote.id)
+  }
+
   return (
     <div>
       <h2>{anecdote.content}</h2>
       <p>has {anecdote.votes} votes</p>
+      <button onClick={handleClick}>add vote</button>
       <p>for more info see <a href={anecdote.info}>{anecdote.info}</a></p>
     </div>
   )
@@ -178,7 +183,7 @@ const App = () => {
           <AnecdoteList anecdotes={anecdotes} />
         </Route>
         <Route path='/anecdotes/:id'>
-          <Anecdote anecdote={anecdote} />
+          <Anecdote anecdote={anecdote} addVote={vote} />
         </Route>
       </Switch>
       <Footer />
